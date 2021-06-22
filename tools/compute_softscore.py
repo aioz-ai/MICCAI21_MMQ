@@ -267,14 +267,14 @@ def get_question(qid, questions):
 
 
 if __name__ == '__main__':
-    RAD_dir = 'data_RAD'
-    train_answers = json.load(open(RAD_dir + '/trainset.json'))
+    VQA_dir = 'data_RAD'
+    train_answers = json.load(open(VQA_dir + '/trainset.json'))
 
     answers = train_answers
     occurence = filter_answers(answers, 0)
 
     print('occ', (len(occurence)))
-    cache_path = RAD_dir + '/cache/trainval_ans2label.pkl'
+    cache_path = VQA_dir + '/cache/trainval_ans2label.pkl'
     if os.path.isfile(cache_path):
         print('found %s' % cache_path)
         ans2label = cPickle.load(open(cache_path, 'rb'))
@@ -283,5 +283,5 @@ if __name__ == '__main__':
 
     compute_target(train_answers, ans2label, 'train')
 
-    test_answers = json.load(open(RAD_dir + '/testset.json'))
+    test_answers = json.load(open(VQA_dir + '/testset.json'))
     compute_target(test_answers, ans2label, 'test')

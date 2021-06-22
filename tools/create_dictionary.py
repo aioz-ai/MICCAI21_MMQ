@@ -44,12 +44,12 @@ def create_glove_embedding_init(idx2word, glove_file):
 
 
 if __name__ == '__main__':
-    RAD_dir = 'data_RAD'
-    d = create_dictionary(RAD_dir)
-    d.dump_to_file(RAD_dir + '/dictionary.pkl')
+    VQA_dir = 'data_RAD'
+    d = create_dictionary(VQA_dir)
+    d.dump_to_file(VQA_dir + '/dictionary.pkl')
 
-    d = Dictionary.load_from_file(RAD_dir + '/dictionary.pkl')
+    d = Dictionary.load_from_file(VQA_dir + '/dictionary.pkl')
     emb_dim = 300
-    glove_file = RAD_dir + '/glove/glove.6B.%dd.txt' % emb_dim
+    glove_file = VQA_dir + '/glove/glove.6B.%dd.txt' % emb_dim
     weights, word2emb = create_glove_embedding_init(d.idx2word, glove_file)
-    np.save(RAD_dir + '/glove6b_init_%dd.npy' % emb_dim, weights)
+    np.save(VQA_dir + '/glove6b_init_%dd.npy' % emb_dim, weights)

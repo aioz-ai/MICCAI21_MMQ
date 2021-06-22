@@ -83,9 +83,9 @@ def parse_args():
                         help='dropout of rate of final classifier')
 
     # Train with RAD
-    parser.add_argument('--use_RAD', action='store_true', default=False,
+    parser.add_argument('--use_VQA', action='store_true', default=False,
                         help='Using TDIUC dataset to train')
-    parser.add_argument('--RAD_dir', type=str,
+    parser.add_argument('--VQA_dir', type=str,
                         help='RAD dir')
 
     # Optimization hyper-parameters
@@ -135,10 +135,10 @@ if __name__ == '__main__':
     torch.backends.cudnn.benchmark = True
     torch.backends.cudnn.deterministic = True
     # Load dictionary and RAD training dataset
-    if args.use_RAD:
-        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.RAD_dir, 'dictionary.pkl'))
+    if args.use_VQA:
+        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
         train_dset = dataset_pathVQA.VQAFeatureDataset('train', args, dictionary, question_len=args.question_len)
-        if 'RAD' not in args.RAD_dir:
+        if 'RAD' not in args.VQA_dir:
             val_dset = dataset_pathVQA.VQAFeatureDataset('val', args, dictionary, question_len=args.question_len)
     batch_size = args.batch_size
     # Create VQA model
@@ -157,7 +157,7 @@ if __name__ == '__main__':
         epoch = model_data['epoch'] + 1
     # create training dataloader
     train_loader = DataLoader(train_dset, batch_size, shuffle=True, num_workers=0, collate_fn=utils.trim_collate, pin_memory=True)
-    if 'RAD' not in args.RAD_dir:
+    if 'RAD' not in args.VQA_dir:
         eval_loader = DataLoader(val_dset, batch_size, shuffle=False, num_workers=0, collate_fn=utils.trim_collate, pin_memory=True)
     else:
         eval_loader = None

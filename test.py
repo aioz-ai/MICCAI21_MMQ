@@ -75,9 +75,9 @@ def parse_args():
                         help='dropout of rate of final classifier')
 
     # Train with RAD
-    parser.add_argument('--use_RAD', action='store_true', default=False,
+    parser.add_argument('--use_VQA', action='store_true', default=False,
                         help='Using TDIUC dataset to train')
-    parser.add_argument('--RAD_dir', type=str,
+    parser.add_argument('--VQA_dir', type=str,
                         help='RAD dir')
 
     # Optimization hyper-parameters
@@ -234,8 +234,8 @@ if __name__ == '__main__':
     args.device = torch.device("cuda:" + str(args.gpu) if args.gpu >= 0 else "cpu")
 
     # Check if evaluating on TDIUC dataset or VQA dataset
-    if args.use_RAD:
-        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.RAD_dir , 'dictionary.pkl'))
+    if args.use_VQA:
+        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir , 'dictionary.pkl'))
         eval_dset = dataset_pathVQA.VQAFeatureDataset(args.split, args, dictionary)
 
     batch_size = args.batch_size
@@ -262,8 +262,8 @@ if __name__ == '__main__':
         model.train(False)
         if not os.path.exists(args.output):
             os.makedirs(args.output)
-        if args.use_RAD:
-            if 'RAD' in args.RAD_dir:
+        if args.use_VQA:
+            if 'RAD' in args.VQA_dir:
                 result, answers_list = get_result_RAD(model, eval_loader, args.device, args)
             else:
                 result, answers_list = get_result_pathVQA(model, eval_loader, args.device, args)

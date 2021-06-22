@@ -43,12 +43,12 @@ def create_glove_embedding_init(idx2word, glove_file):
 
 
 if __name__ == '__main__':
-    RAD_dir = 'data_RAD'
+    VQA_dir = 'data_RAD'
     emb_dims = [300]
     weights = [0] * len(emb_dims)
-    label2ans = cPickle.load(open(RAD_dir + '/cache/trainval_label2ans.pkl', 'rb'))
+    label2ans = cPickle.load(open(VQA_dir + '/cache/trainval_label2ans.pkl', 'rb'))
 
     for idx, emb_dim in enumerate(emb_dims): # available embedding sizes
-        glove_file = RAD_dir + '/glove/glove.6B.%dd.txt' % emb_dim
+        glove_file = VQA_dir + '/glove/glove.6B.%dd.txt' % emb_dim
         weights[idx], word2emb = create_glove_embedding_init(label2ans, glove_file)
-    np.save(RAD_dir + '/glove6b_emb_%dd.npy' % functools.reduce(operator.add, emb_dims), np.hstack(weights))
+    np.save(VQA_dir + '/glove6b_emb_%dd.npy' % functools.reduce(operator.add, emb_dims), np.hstack(weights))

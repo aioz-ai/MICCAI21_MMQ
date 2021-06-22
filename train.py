@@ -80,7 +80,7 @@ def train(args, model, train_loader, eval_loader, num_epochs, output, opt=None, 
         # Predicting and computing score
         for i, (v, q, a, _, _, _) in enumerate(train_loader):
             if args.maml:
-                if 'RAD' in args.RAD_dir:
+                if 'RAD' in args.VQA_dir:
                     v[0] = v[0].reshape(v[0].shape[0], args.img_size, args.img_size).unsqueeze(1)
                 else:
                     v[0] = v[0].reshape(v[0].shape[0], 3, args.img_size, args.img_size)
@@ -140,7 +140,7 @@ def evaluate(model, dataloader, args):
     with torch.no_grad():
         for v, q, a, _, _, _ in iter(dataloader):
             if args.maml:
-                if 'RAD' in args.RAD_dir:
+                if 'RAD' in args.VQA_dir:
                     v[0] = v[0].reshape(v[0].shape[0], args.img_size, args.img_size).unsqueeze(1)
                 else:
                     v[0] = v[0].reshape(v[0].shape[0], 3, args.img_size, args.img_size)

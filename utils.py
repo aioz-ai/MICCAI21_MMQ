@@ -290,21 +290,21 @@ def time_since(since, percent):
 
 def tfidf_loading(use_tfidf, w_emb, args):
     if use_tfidf:
-        if args.use_RAD:
-            dict = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.RAD_dir, 'dictionary.pkl'))
+        if args.use_VQA:
+            dict = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
 
         # load extracted tfidf and weights from file for saving loading time
-        if args.use_RAD:
-            if os.path.isfile(os.path.join(args.RAD_dir, 'embed_tfidf_weights.pkl')) == True:
+        if args.use_VQA:
+            if os.path.isfile(os.path.join(args.VQA_dir, 'embed_tfidf_weights.pkl')) == True:
                 print("Loading embedding tfidf and weights from file")
-                with open(os.path.join(args.RAD_dir ,'embed_tfidf_weights.pkl'), 'rb') as f:
+                with open(os.path.join(args.VQA_dir ,'embed_tfidf_weights.pkl'), 'rb') as f:
                     w_emb = torch.load(f)
                 print("Load embedding tfidf and weights from file successfully")
             else:
                 print("Embedding tfidf and weights haven't been saving before")
                 tfidf, weights = dataset_pathVQA.tfidf_from_questions(['train', 'val'], args, dict)
-                w_emb.init_embedding(os.path.join(args.RAD_dir, 'glove6b_init_300d.npy'), tfidf, weights)
-                with open(os.path.join(args.RAD_dir ,'embed_tfidf_weights.pkl'), 'wb') as f:
+                w_emb.init_embedding(os.path.join(args.VQA_dir, 'glove6b_init_300d.npy'), tfidf, weights)
+                with open(os.path.join(args.VQA_dir ,'embed_tfidf_weights.pkl'), 'wb') as f:
                     torch.save(w_emb, f)
                 print("Saving embedding with tfidf and weights successfully")
     return w_emb

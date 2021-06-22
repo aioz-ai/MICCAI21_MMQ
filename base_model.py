@@ -152,22 +152,22 @@ def build_BAN(dataset, args, priotize_using_counter=False):
         if len(args.maml_nums) > 1:
             maml_v_emb = []
             for model_t in args.maml_nums:
-                weight_path = args.RAD_dir + '/' + 't%s_'%(model_t) + args.maml_model_path
+                weight_path = args.VQA_dir + '/' + 't%s_'%(model_t) + args.maml_model_path
                 print('load initial weights MAML from: %s' % (weight_path))
                 # maml_v_emb = SimpleCNN32(weight_path, args.eps_cnn, args.momentum_cnn)
-                maml_v_emb_temp = MAML(args.RAD_dir)
+                maml_v_emb_temp = MAML(args.VQA_dir)
                 maml_v_emb_temp.load_state_dict(torch.load(weight_path))
                 maml_v_emb.append(maml_v_emb_temp)
         else:
-            weight_path = args.RAD_dir + '/' + 't%s_' % (args.maml_nums[0]) + args.maml_model_path
+            weight_path = args.VQA_dir + '/' + 't%s_' % (args.maml_nums[0]) + args.maml_model_path
             print('load initial weights MAML from: %s' % (weight_path))
             # maml_v_emb = SimpleCNN32(weight_path, args.eps_cnn, args.momentum_cnn)
-            maml_v_emb = MAML(args.RAD_dir)
+            maml_v_emb = MAML(args.VQA_dir)
             maml_v_emb.load_state_dict(torch.load(weight_path))
     # build and load pre-trained Auto-encoder model
     if args.autoencoder:
         ae_v_emb = Auto_Encoder_Model()
-        weight_path = args.RAD_dir + '/' + args.ae_model_path
+        weight_path = args.VQA_dir + '/' + args.ae_model_path
         print('load initial weights DAE from: %s'%(weight_path))
         ae_v_emb.load_state_dict(torch.load(weight_path))
     # Loading tfidf weighted embedding
@@ -214,28 +214,28 @@ def build_SAN(dataset, args):
                              args.dropout)
     # build and load pre-trained MAML model
     if args.maml:
-        # weight_path = args.RAD_dir + '/' + args.maml_model_path
+        # weight_path = args.VQA_dir + '/' + args.maml_model_path
         # print('load initial weights MAML from: %s' % (weight_path))
         # maml_v_emb = SimpleCNN(weight_path, args.eps_cnn, args.momentum_cnn)
         if len(args.maml_nums) > 1:
             maml_v_emb = []
             for model_t in args.maml_nums:
-                weight_path = args.RAD_dir + '/' + 't%s_'%(model_t) + args.maml_model_path
+                weight_path = args.VQA_dir + '/' + 't%s_'%(model_t) + args.maml_model_path
                 print('load initial weights MAML from: %s' % (weight_path))
                 # maml_v_emb = SimpleCNN32(weight_path, args.eps_cnn, args.momentum_cnn)
-                maml_v_emb_temp = MAML(args.RAD_dir)
+                maml_v_emb_temp = MAML(args.VQA_dir)
                 maml_v_emb_temp.load_state_dict(torch.load(weight_path))
                 maml_v_emb.append(maml_v_emb_temp)
         else:
-            weight_path = args.RAD_dir + '/' + 't%s_' % (args.maml_nums[0]) + args.maml_model_path
+            weight_path = args.VQA_dir + '/' + 't%s_' % (args.maml_nums[0]) + args.maml_model_path
             print('load initial weights MAML from: %s' % (weight_path))
             # maml_v_emb = SimpleCNN32(weight_path, args.eps_cnn, args.momentum_cnn)
-            maml_v_emb = MAML(args.RAD_dir)
+            maml_v_emb = MAML(args.VQA_dir)
             maml_v_emb.load_state_dict(torch.load(weight_path))
     # build and load pre-trained Auto-encoder model
     if args.autoencoder:
         ae_v_emb = Auto_Encoder_Model()
-        weight_path = args.RAD_dir + '/' + args.ae_model_path
+        weight_path = args.VQA_dir + '/' + args.ae_model_path
         print('load initial weights DAE from: %s'%(weight_path))
         ae_v_emb.load_state_dict(torch.load(weight_path))
     # Loading tfidf weighted embedding

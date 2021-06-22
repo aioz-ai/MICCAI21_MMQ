@@ -146,7 +146,7 @@ class VQAFeatureDataset(Dataset):
         super(VQAFeatureDataset, self).__init__()
         self.args = args
         assert name in ['train', 'val', 'test']
-        dataroot = args.RAD_dir
+        dataroot = args.VQA_dir
         ans2label_path = os.path.join(dataroot, 'cache', 'trainval_ans2label.pkl')
         label2ans_path = os.path.join(dataroot, 'cache', 'trainval_label2ans.pkl')
         self.ans2label = cPickle.load(open(ans2label_path, 'rb'))
@@ -169,7 +169,7 @@ class VQAFeatureDataset(Dataset):
         # load image data for Auto-encoder module
         if args.autoencoder:
             # TODO: load images
-            if 'RAD' in self.args.RAD_dir:
+            if 'RAD' in self.args.VQA_dir:
                 images_path = os.path.join(dataroot, 'images128x128.pkl')
             else:
                 images_path = os.path.join(dataroot, 'pytorch_images128_ae.pkl')
@@ -206,7 +206,7 @@ class VQAFeatureDataset(Dataset):
             self.maml_images_data = torch.stack(self.maml_images_data)
             self.maml_images_data = self.maml_images_data.type('torch.FloatTensor')
         if self.args.autoencoder:
-            if 'RAD' in self.args.RAD_dir:
+            if 'RAD' in self.args.VQA_dir:
                 self.ae_images_data = torch.from_numpy(self.ae_images_data)
             else:
                 self.ae_images_data = torch.stack(self.ae_images_data)
@@ -237,7 +237,7 @@ class VQAFeatureDataset(Dataset):
 
         image_data = [0, 0]
         if self.args.maml:
-            if 'RAD' in self.args.RAD_dir:
+            if 'RAD' in self.args.VQA_dir:
                 maml_images_data = self.maml_images_data[entry['image']].reshape(self.args.img_size * self.args.img_size)
             else:
                 maml_images_data = self.maml_images_data[entry['image']].reshape(3 * self.args.img_size * self.args.img_size)
@@ -264,8 +264,8 @@ def tfidf_from_questions(names, args, dictionary, dataroot='data', target=['rad'
     inds = [[], []] # rows, cols for uncoalesce sparse matrix
     df = dict()
     N = len(dictionary)
-    if args.use_RAD:
-        dataroot = args.RAD_dir
+    if args.use_VQA:
+        dataroot = args.VQA_dir
     def populate(inds, df, text):
         tokens = dictionary.tokenize(text, True)
         for t in tokens:
