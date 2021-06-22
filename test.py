@@ -4,7 +4,7 @@ This code is modified based on Jin-Hwa Kim's repository (Bilinear Attention Netw
 import argparse
 import torch
 from torch.utils.data import DataLoader
-import dataset_pathVQA
+import dataset_VQA
 import base_model
 import utils
 import pandas as pd
@@ -235,8 +235,8 @@ if __name__ == '__main__':
 
     # Check if evaluating on TDIUC dataset or VQA dataset
     if args.use_VQA:
-        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir , 'dictionary.pkl'))
-        eval_dset = dataset_pathVQA.VQAFeatureDataset(args.split, args, dictionary)
+        dictionary = dataset_VQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
+        eval_dset = dataset_VQA.VQAFeatureDataset(args.split, args, dictionary)
 
     batch_size = args.batch_size
 

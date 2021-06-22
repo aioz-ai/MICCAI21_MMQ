@@ -20,7 +20,7 @@ from torch.utils.data.dataloader import default_collate
 import math
 import time
 
-import dataset_pathVQA
+import dataset_VQA
 
 EPS = 1e-7
 numpy_type_map = {
@@ -291,7 +291,7 @@ def time_since(since, percent):
 def tfidf_loading(use_tfidf, w_emb, args):
     if use_tfidf:
         if args.use_VQA:
-            dict = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
+            dict = dataset_VQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
 
         # load extracted tfidf and weights from file for saving loading time
         if args.use_VQA:
@@ -302,7 +302,7 @@ def tfidf_loading(use_tfidf, w_emb, args):
                 print("Load embedding tfidf and weights from file successfully")
             else:
                 print("Embedding tfidf and weights haven't been saving before")
-                tfidf, weights = dataset_pathVQA.tfidf_from_questions(['train', 'val'], args, dict)
+                tfidf, weights = dataset_VQA.tfidf_from_questions(['train', 'val'], args, dict)
                 w_emb.init_embedding(os.path.join(args.VQA_dir, 'glove6b_init_300d.npy'), tfidf, weights)
                 with open(os.path.join(args.VQA_dir ,'embed_tfidf_weights.pkl'), 'wb') as f:
                     torch.save(w_emb, f)

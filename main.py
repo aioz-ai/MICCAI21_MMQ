@@ -5,7 +5,7 @@ import os
 import argparse
 import torch
 from torch.utils.data import DataLoader, ConcatDataset
-import dataset_pathVQA
+import dataset_VQA
 import base_model
 from train import train
 import utils
@@ -82,7 +82,7 @@ def parse_args():
     parser.add_argument('--dropout', default=0.5, type=float, metavar='dropout',
                         help='dropout of rate of final classifier')
 
-    # Train with RAD
+    # Train with VQA dataset
     parser.add_argument('--use_VQA', action='store_true', default=False,
                         help='Using TDIUC dataset to train')
     parser.add_argument('--VQA_dir', type=str,
@@ -136,10 +136,11 @@ if __name__ == '__main__':
     torch.backends.cudnn.deterministic = True
     # Load dictionary and RAD training dataset
     if args.use_VQA:
-        dictionary = dataset_pathVQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
-        train_dset = dataset_pathVQA.VQAFeatureDataset('train', args, dictionary, question_len=args.question_len)
+        dictionary = dataset_VQA.Dictionary.load_from_file(os.path.join(args.VQA_dir, 'dictionary.pkl'))
+        train_dset = dataset_VQA.VQAFeatureDataset('train', args, dictionary, question_len=args.question_len)
+        # load validation set (RAD doesnt have validation set)
         if 'RAD' not in args.VQA_dir:
-            val_dset = dataset_pathVQA.VQAFeatureDataset('val', args, dictionary, question_len=args.question_len)
+            val_dset = dataset_VQA.VQAFeatureDataset('val', args, dictionary, question_len=args.question_len)
     batch_size = args.batch_size
     # Create VQA model
     constructor = 'build_%s' % args.model
