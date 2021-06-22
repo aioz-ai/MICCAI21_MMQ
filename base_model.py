@@ -34,6 +34,7 @@ class BAN_Model(nn.Module):
         self.drop = nn.Dropout(.5)
         self.tanh = nn.Tanh()
         if args.maml:
+            # init multiple maml models
             if len(self.args.maml_nums) > 1:
                 self.maml_v_emb = nn.ModuleList(model for model in maml_v_emb)
             else:
@@ -51,7 +52,8 @@ class BAN_Model(nn.Module):
         return: logits, not probs
         """
         # get visual feature
-        if self.args.maml:
+        if self.args.maml: # get maml feature
+            # compute multiple maml embeddings and concatenate them
             if len(self.args.maml_nums) > 1:
                 maml_v_emb = self.maml_v_emb[0](v[0]).unsqueeze(1)
                 for j in range(1, len(self.maml_v_emb)):
@@ -60,13 +62,13 @@ class BAN_Model(nn.Module):
             else:
                 maml_v_emb = self.maml_v_emb(v[0]).unsqueeze(1)
             v_emb = maml_v_emb
-        if self.args.autoencoder:
+        if self.args.autoencoder: # get dae feature
             encoder = self.ae_v_emb.forward_pass(v[1])
             decoder = self.ae_v_emb.reconstruct_pass(encoder)
             ae_v_emb = encoder.view(encoder.shape[0], -1)
             ae_v_emb = self.convert(ae_v_emb).unsqueeze(1)
             v_emb = ae_v_emb
-        if self.args.maml and self.args.autoencoder:
+        if self.args.maml and self.args.autoencoder: # concatenate maml feature with dae feature
             v_emb = torch.cat((maml_v_emb, ae_v_emb), 2)
         # get lextual feature
         w_emb = self.w_emb(q)
@@ -95,6 +97,7 @@ class SAN_Model(nn.Module):
         self.v_att = v_att
         self.classifier = classifier
         if args.maml:
+            # init multiple maml models
             if len(self.args.maml_nums) > 1:
                 self.maml_v_emb = nn.ModuleList(model for model in maml_v_emb)
             else:
@@ -112,7 +115,8 @@ class SAN_Model(nn.Module):
         return: logits, not probs
         """
         # get visual feature
-        if self.args.maml:
+        if self.args.maml: # get maml feature
+            # compute multiple maml embeddings and concatenate them
             if len(self.args.maml_nums) > 1:
                 maml_v_emb = self.maml_v_emb[0](v[0]).unsqueeze(1)
                 for j in range(1, len(self.maml_v_emb)):
@@ -121,13 +125,13 @@ class SAN_Model(nn.Module):
             else:
                 maml_v_emb = self.maml_v_emb(v[0]).unsqueeze(1)
             v_emb = maml_v_emb
-        if self.args.autoencoder:
+        if self.args.autoencoder: # get dae feature
             encoder = self.ae_v_emb.forward_pass(v[1])
             decoder = self.ae_v_emb.reconstruct_pass(encoder)
             ae_v_emb = encoder.view(encoder.shape[0], -1)
             ae_v_emb = self.convert(ae_v_emb).unsqueeze(1)
             v_emb = ae_v_emb
-        if self.args.maml and self.args.autoencoder:
+        if self.args.maml and self.args.autoencoder: # concatenate maml feature with dae feature
             v_emb = torch.cat((maml_v_emb, ae_v_emb), 2)
         # get textual feature
         w_emb = self.w_emb(q)
@@ -147,8 +151,9 @@ def build_BAN(dataset, args, priotize_using_counter=False):
     w_emb = WordEmbedding(dataset.dictionary.ntoken, 300, .0, args.op)
     q_emb = QuestionEmbedding(300 if 'c' not in args.op else 600, args.num_hid, 1, False, .0,  args.rnn)
     v_att = BiAttention(dataset.v_dim, args.num_hid, args.num_hid, args.gamma)
-    # build and load pre-trained MAML model
+    # build and load pre-trained MAML model(s)
     if args.maml:
+        # load multiple pre-trained maml models(s)
         if len(args.maml_nums) > 1:
             maml_v_emb = []
             for model_t in args.maml_nums:
@@ -212,11 +217,9 @@ def build_SAN(dataset, args):
     q_emb = QuestionEmbedding(300 if 'c' not in args.op else 600, args.num_hid, 1, False, 0.0, args.rnn)
     v_att = StackedAttention(args.num_stacks, dataset.v_dim, args.num_hid, args.num_hid, dataset.num_ans_candidates,
                              args.dropout)
-    # build and load pre-trained MAML model
+    # build and load pre-trained MAML model(s)
     if args.maml:
-        # weight_path = args.VQA_dir + '/' + args.maml_model_path
-        # print('load initial weights MAML from: %s' % (weight_path))
-        # maml_v_emb = SimpleCNN(weight_path, args.eps_cnn, args.momentum_cnn)
+        # load multiple pre-trained maml models(s)
         if len(args.maml_nums) > 1:
             maml_v_emb = []
             for model_t in args.maml_nums:
@@ -229,7 +232,6 @@ def build_SAN(dataset, args):
         else:
             weight_path = args.VQA_dir + '/' + 't%s_' % (args.maml_nums[0]) + args.maml_model_path
             print('load initial weights MAML from: %s' % (weight_path))
-            # maml_v_emb = SimpleCNN32(weight_path, args.eps_cnn, args.momentum_cnn)
             maml_v_emb = MAML(args.VQA_dir)
             maml_v_emb.load_state_dict(torch.load(weight_path))
     # build and load pre-trained Auto-encoder model

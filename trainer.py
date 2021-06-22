@@ -132,8 +132,9 @@ class Trainer(object):
                         features = self.model(sample[0], sample[1])
                     preds = self.model.classifier(features)
                     loss = self.criterion(preds.float(), answers)
-                    if self.args.autoencoder:
+                    if self.args.autoencoder: # compute reconstruction loss
                         loss_ae = self.ae_criterion(img_data, decoder)
+                        # multi-task loss
                         loss = loss + (loss_ae*self.args.ae_alpha)
                     loss /= answers.size()[0]
                     final_preds = preds
