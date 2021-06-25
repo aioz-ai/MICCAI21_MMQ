@@ -58,7 +58,14 @@ def load_feature_and_logit(args):
     return features, logits
 
 def fuse_score(features, logits, alpha=0.8):
-    # TODO
+    """
+    Compute fuse score using equation:  S_F = \gamma S_P  + (1-\gamma)\sum_{t=1}^m 1 - Cosine \left(F_{c}, F_t\right) \forall F_{c} \neq  F_t
+    For more detail, please visit Algorithm 2 of the paper.
+    :param features:
+    :param logits:
+    :param alpha:
+    :return  results: score list, type:
+    """
     cos = torch.nn.CosineSimilarity(dim=0)
     results = []
     for idx in range(len(features)):

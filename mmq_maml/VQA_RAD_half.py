@@ -15,7 +15,14 @@ def mean_confidence_interval(accs, confidence=0.95):
     return m, h
 
 def unlabel_processing(dataset, unlabel_pool, threshold_fre = 47, threshold_max = 15):
-    # TODO
+    """
+        Auto annotation for samples collection.
+        :param dataset:
+        :param unlabel_pool:
+        :param threshold_fre:
+        :param threshold_max:
+        :return
+    """
     count = 0
     new_path = dataset.path + '_unlabel_add'
     for i in unlabel_pool:
@@ -41,6 +48,14 @@ def unlabel_processing(dataset, unlabel_pool, threshold_fre = 47, threshold_max 
     return count
 
 def label_processing(dataset, label_pool, threshold=0.3):
+    """
+        Auto removable for samples that have high uncertanty.
+        :param dataset:
+        :param label_pool:
+        :param threshold:
+        :return  count:
+    """
+
     count = 0
     new_path = dataset.path + '_label_remove'
     if not os.path.exists(new_path):
@@ -54,6 +69,11 @@ def label_processing(dataset, label_pool, threshold=0.3):
     return count
 
 def final_processing(dataset):
+    """
+            Refine meta-data and unlabel data.
+            :param dataset:
+            :return
+    """
     root = dataset.path
 
     src = root + '_unlabel_add'

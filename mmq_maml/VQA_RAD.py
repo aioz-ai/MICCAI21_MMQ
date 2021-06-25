@@ -144,6 +144,7 @@ class VQARAD_maml(Dataset):
             self.query_x_batch.append(query_x)  # append sets to current sets
 
     def create_batch_unlabel(self, batchsz):
+        # Data Refinement for unlabel data, See Algorithm 1 of the paper
         self.support_x_batch = []  # support set batch
         self.query_x_batch = []  # query set batch
 

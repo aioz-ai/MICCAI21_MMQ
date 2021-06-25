@@ -254,6 +254,7 @@ class Meta(nn.Module):
             pred_q = logits_q_softmax.argmax(dim=1)
 
         del net
+        # TODO - IGNORE
         results = dict()
         for i, path in enumerate(flatten_query_x):
             # results[path[0]] = [y_spt_real[pred_q[i]].item(), logits_q_softmax[i][pred_q[i]].item()]
@@ -300,6 +301,7 @@ class Meta(nn.Module):
 
         del net
         results = dict()
+        # TODO-IGNORE
         for i, path in enumerate(flatten_query_x):
             if y_qry_real[i] == 20:
                continue
@@ -345,6 +347,7 @@ class Meta(nn.Module):
             # pred_q = logits_q_softmax.argmax(dim=1)
 
         del net
+        # TODO-IGNORE
         results = []
         for i in range(len(x_qry)):
             results.append(logits_q_softmax[i][y_qry[i]].item())
