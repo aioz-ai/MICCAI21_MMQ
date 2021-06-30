@@ -81,7 +81,7 @@ MMQ results on VQA-RAD test set.
 |     MMQ    | 5 | 3 |    53.7    |     75.8    |    67   |
 | MMQ + MEVF | 5 | 2 |    56.9    |     75.7    |   68.2  |
 
-We have considered the recommendation of our reviewers about integrating MMQ into the MEVF. The setup further improves the overall performance in both PathVQA and VQA-RAD datasets. The number of parameters is only a 3% increase in comparison with our original MMQ. We please to provide the pre-trained weights of our state-of-the-art (SOTA) models in [here](#Pretrained models and Testing) .
+We have considered the recommendation of our reviewers about integrating MMQ into the MEVF. The setup further improves the overall performance in both PathVQA and VQA-RAD datasets. The number of parameters is only a 3% increase in comparison with our original MMQ. We please to provide the pre-trained weights of our state-of-the-art (SOTA) models in [here](#pretrained-models-and-testing).
 
 ### Training
 
