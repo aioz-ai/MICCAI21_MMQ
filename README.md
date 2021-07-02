@@ -30,8 +30,8 @@ $ cd mmq_maml
 
 And now, you are in 'mmq_maml' folder.
 
-* **PathVQA dataset for MMQ task** should be downloaded via [link](link mmq-pathVQA). The downloaded file should be extracted to `data/pathvqa_maml/` directory.
-* **VQA-RAD dataset for MMQ task** should be downloaded via [link](link mmq-VQA-RAD). The downloaded file should be extracted to `data/vqarad_maml/` directory.
+* **PathVQA dataset for MMQ task** should be downloaded via [link](https://vision.aioz.io/f/19dbe6e3f4e940459053/?dl=1). The downloaded file should be extracted to `data/pathvqa_maml/` directory.
+* **VQA-RAD dataset for MMQ task** should be downloaded via [link](https://vision.aioz.io/f/d88e9033805a4a1cbb19/?dl=1). The downloaded file should be extracted to `data/vqarad_maml/` directory.
 
 ### Traing MAML models with MMQ
 
@@ -55,11 +55,11 @@ Important: For all VQA experiments, you should be in the 'root' folder.
 
 ##### PathVQA dataset for VQA task
 
-All data should be downloaded via [link](link vqa-pathVQA). The downloaded file should be extracted to `data_PathVQA/` directory.
+All data should be downloaded via [link](https://vision.aioz.io/f/e0554683595c4e1d9a08/?dl=1). The downloaded file should be extracted to `data_PathVQA/` directory.
 
 ##### VQA-RAD dataset for VQA task
 
-All data should be downloaded via [link](https://drive.google.com/file/d/1ZTZdrwt1Z2fHehQujYKpj1o9Hf0Jylr7/view?usp=sharing). The downloaded file should be extracted to `data_RAD/` directory.
+All data should be downloaded via [link](https://vision.aioz.io/f/d6fbe4cef5ac4b948e03/?dl=1). The downloaded file should be extracted to `data_RAD/` directory.
 
 ### Experimental results
 
@@ -81,7 +81,7 @@ MMQ results on VQA-RAD test set.
 |     MMQ    | 5 | 3 |    53.7    |     75.8    |    67   |
 | MMQ + MEVF | 5 | 2 |    56.9    |     75.7    |   68.2  |
 
-We have considered the recommendation of our reviewers about integrating MMQ into the MEVF. The setup further improves the overall performance in both PathVQA and VQA-RAD datasets. The number of parameters is only a 3% increase in comparison with our original MMQ. We please to provide the pre-trained weights of our state-of-the-art (SOTA) models in [here](#Pretrained models and Testing) .
+We have considered the recommendation of our reviewers about integrating MMQ into the MEVF. The setup further improves the overall performance in both PathVQA and VQA-RAD datasets. The number of parameters is only a 3% increase in comparison with our original MMQ. We please to provide the pre-trained weights of our state-of-the-art (SOTA) models in [here](#pretrained-models-and-testing) .
 
 ### Training
 
@@ -97,11 +97,11 @@ $ sh run_vqa_VQA_RAD.sh
 
 ### Pretrained models and Testing
 
-For our SOTA model on PathVQA dataset `MMQ_BAN_MEVF_pathVQA`. Please download the [link](mmq_ban_mevf_pathvqa link) and move to `saved_models/MMQ_BAN_MEVF_pathVQA/`. The trained `MMQ_BAN_MEVF_pathVQA` model can be tested in PathVQA test set via: 
+For our SOTA model on PathVQA dataset `MMQ_BAN_MEVF_pathVQA`. Please download the [link](https://vision.aioz.io/f/23897e70fdb443e9862d/?dl=1) and move to `saved_models/MMQ_BAN_MEVF_pathVQA/`. The trained `MMQ_BAN_MEVF_pathVQA` model can be tested in PathVQA test set via: 
 ```
-$ sh run_test_pathVQA.sh
+$ sh run_test_PathVQA.sh
 ```
-For our  SOTA model on VQA-RAD dataset `MMQ_BAN_MEVF_vqaRAD`. Please download the [link](mmq_ban_mevf_vqarad link) and move to `saved_models/MMQ_BAN_MEVF_vqaRAD/`. The trained `MMQ_BAN_MEVF_vqaRAD` model can be tested in VQA-RAD test set via:
+For our  SOTA model on VQA-RAD dataset `MMQ_BAN_MEVF_vqaRAD`. Please download the [link](https://vision.aioz.io/f/73f86d22c6b546a1afc9/?dl=1) and move to `saved_models/MMQ_BAN_MEVF_vqaRAD/`. The trained `MMQ_BAN_MEVF_vqaRAD` model can be tested in VQA-RAD test set via:
 ```
 $ sh run_test_VQA_RAD.sh
 ```
