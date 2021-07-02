@@ -9,12 +9,6 @@ import random
 
 class VQARAD_maml(Dataset):
     """
-    put mini-imagenet files as :
-    root :
-        |- images/*.jpg includes all imgeas
-        |- train.csv
-        |- test.csv
-        |- val.csv
     NOTICE: meta-learning is different from general supervised learning, especially the concept of batch and set.
     batch: contains several sets
     sets: conains n_way * k_shot for meta-train set, n_way * n_query for meta-test set.
