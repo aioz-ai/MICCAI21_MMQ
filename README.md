@@ -1,6 +1,6 @@
 # Multiple Meta-model Quantifying for Medical Visual Question Answering (MMQ-VQA)
 
-This repository is the implementation of `MMQ` for the visual question answering task in medical domain. Our proposal achieves superior accuracy in comparison with other state-of-the-art (sota) methods on two public medical VQA datasets: [PathVQA dataset](aa) and [VQA-RAD dataset](https://www.nature.com/articles/sdata2018251#data-citations).
+This repository is the implementation of `MMQ` for the visual question answering task in medical domain. Our proposal achieves superior accuracy in comparison with other state-of-the-art (sota) methods on two public medical VQA datasets: [PathVQA dataset](https://arxiv.org/abs/2003.10286) and [VQA-RAD dataset](https://www.nature.com/articles/sdata2018251#data-citations).
 
 * On PathVQA dataset, our model achieved **13.9%** for free-form and **63.8%** for yes/no quetions.
 * On VQA-RAD dataset, our model achieved **56.9%** for open-ended and **75.7%** for close-ended questions.
