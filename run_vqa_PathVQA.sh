@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python3 main.py --use_VQA --VQA_dir data_PathVQA --maml --autoencoder --feat_dim 32 --img_size 84 --maml_model_path pretrained_maml_pytorch_other_optimization_5shot_newmethod.pth --maml_nums 2,5 --model BAN --lr 0.01 --seed 2104 --output saved_models/MMQ_BAN_MEVF_pathVQA

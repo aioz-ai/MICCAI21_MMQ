@@ -1,8 +1,8 @@
 # Ignore data folder for light-weight
 data_RAD
 data_RAD/
-data
-data/
+data_PathVQA
+dataPathVQA/
 saved_models
 saved_models/
 results
