@@ -120,7 +120,14 @@ We also provides the pretrained meta-models and CDAE models for further investig
 If you use this code as part of any published research, we'd really appreciate it if you could cite the following paper:
 
 ```
-Updating
+@misc{do2021multiple,
+      title={Multiple Meta-model Quantifying for Medical Visual Question Answering},
+      author={Tuong Do and Binh X. Nguyen and Erman Tjiputra and Minh Tran and Quang D. Tran and Anh Nguyen},
+      year={2021},
+      eprint={2105.08913},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
 
 ### License
