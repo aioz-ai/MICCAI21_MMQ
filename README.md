@@ -11,6 +11,10 @@ This repository is based on and inspired by @Binh D. Nguyen's [work](https://git
 
 ### Prerequisites
 
+PYTHON 3.6
+
+CUDA 9.2
+
 Please install dependence package by run following command:
 ```
 pip install -r requirements.txt
