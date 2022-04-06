@@ -132,6 +132,16 @@ If you use this code as part of any published research, we'd really appreciate i
 }
 ```
 
+If you find that the Mixture of Enhanced Visual Features (MEVF) model for MedVQA is useful, you could cite the following paper:
+
+```
+@inproceedings{aioz_mevf_miccai19,
+  author={Binh D. Nguyen, Thanh-Toan Do, Binh X. Nguyen, Tuong Do, Erman Tjiputra, Quang D. Tran},
+  title={Overcoming Data Limitation in Medical Visual Question Answering},
+  booktitle = {MICCAI},
+  year={2019}
+}
+```
 ### License
 
 MIT License
