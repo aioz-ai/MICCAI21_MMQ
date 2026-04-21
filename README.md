@@ -34,7 +34,7 @@ $ cd mmq_maml
 
 And now, you are in 'mmq_maml' folder.
 
-* **PathVQA dataset for MMQ task** should be downloaded via [link](https://vision.aioz.io/f/19dbe6e3f4e940459053/?dl=1). The downloaded file should be extracted to `data/pathvqa_maml/` directory.
+* **PathVQA dataset for MMQ task** should be downloaded via [link](https://huggingface.co/datasets/aiozai/MICCAI2021_MMQ/resolve/main/pathvqa_maml.zip). The downloaded file should be extracted to `data/pathvqa_maml/` directory.
 * **VQA-RAD dataset for MMQ task** should be downloaded via [link](https://vision.aioz.io/f/d88e9033805a4a1cbb19/?dl=1). The downloaded file should be extracted to `data/vqarad_maml/` directory.
 
 ### Traing MAML models with MMQ
@@ -59,7 +59,7 @@ Important: For all VQA experiments, you should be in the 'root' folder.
 
 ##### PathVQA dataset for VQA task
 
-All data should be downloaded via [link](https://vision.aioz.io/f/e0554683595c4e1d9a08/?dl=1). The downloaded file should be extracted to `data_PathVQA/` directory.
+All data should be downloaded via [link](https://huggingface.co/datasets/aiozai/MICCAI2021_MMQ/resolve/main/data_PathVQA.zip). The downloaded file should be extracted to `data_PathVQA/` directory.
 
 ##### VQA-RAD dataset for VQA task
 
@@ -101,7 +101,7 @@ $ sh run_vqa_VQA_RAD.sh
 
 ### Pretrained models and Testing
 
-For our SOTA model on PathVQA dataset `MMQ_BAN_MEVF_pathVQA`. Please download the [link](https://vision.aioz.io/f/23897e70fdb443e9862d/?dl=1) and move to `saved_models/MMQ_BAN_MEVF_pathVQA/`. The trained `MMQ_BAN_MEVF_pathVQA` model can be tested in PathVQA test set via: 
+For our SOTA model on PathVQA dataset `MMQ_BAN_MEVF_pathVQA`. Please download the [link](https://huggingface.co/aiozai/MICCAI2021_MMQ/resolve/main/MMQ_BAN_MEVF_pathVQA.zip) and move to `saved_models/MMQ_BAN_MEVF_pathVQA/`. The trained `MMQ_BAN_MEVF_pathVQA` model can be tested in PathVQA test set via: 
 ```
 $ sh run_test_PathVQA.sh
 ```
